@@ -57,6 +57,11 @@
                                 <i class="fa fa-edit mr-3"></i>
                             </a>
                             <c:out value="${post.name}"/>
+
+                            <br>
+                            <c:forEach items="${post.comments}" var="comment">
+                                <c:out value="${comment.text}"/> <br>
+                            </c:forEach>
                         </td>
                     </tr>
                 </c:forEach>

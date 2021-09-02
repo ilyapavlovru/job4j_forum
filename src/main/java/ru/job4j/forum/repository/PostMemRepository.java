@@ -1,6 +1,7 @@
 package ru.job4j.forum.repository;
 
 import org.springframework.stereotype.Repository;
+import ru.job4j.forum.model.Comment;
 import ru.job4j.forum.model.Post;
 
 import java.util.Collection;
@@ -20,6 +21,9 @@ public class PostMemRepository {
         Post post2 = Post.of(2, "Продаю ноутбук HP Pavilion Gaming 15-ec1089ur");
         posts.put(1, post1);
         posts.put(2, post2);
+
+        post1.addComment(Comment.of(1, "Отличный пост!"));
+        post1.addComment(Comment.of(2, "Какова цена?"));
     }
 
     public Collection<Post> findAllPosts() {
@@ -30,7 +34,9 @@ public class PostMemRepository {
         if (post.getId() == 0) {
             post.setId(ACCIDENT_ID.incrementAndGet());
         }
-        posts.put(post.getId(), post);
+        Post foundPost = findPostById(post.getId()).get();
+        foundPost.setName(post.getName());
+        posts.put(post.getId(), foundPost);
     }
 
     public Optional<Post> findPostById(int id) {

@@ -42,8 +42,8 @@ public class IndexControl {
 
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
-        Optional<Post> accident = postService.findPostById(id);
-        accident.ifPresent(value -> model.addAttribute("post", value));
+        Optional<Post> post = postService.findPostById(id);
+        post.ifPresent(value -> model.addAttribute("post", value));
         return "post/update";
     }
 }
