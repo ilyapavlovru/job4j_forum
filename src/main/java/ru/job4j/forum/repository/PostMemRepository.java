@@ -30,13 +30,16 @@ public class PostMemRepository {
         return posts.values();
     }
 
-    public void savePost(Post post) {
+    public Post savePost(Post post) {
         if (post.getId() == 0) {
             post.setId(ACCIDENT_ID.incrementAndGet());
+            posts.put(post.getId(), post);
+            return post;
         }
         Post foundPost = findPostById(post.getId()).get();
         foundPost.setName(post.getName());
         posts.put(post.getId(), foundPost);
+        return foundPost;
     }
 
     public Optional<Post> findPostById(int id) {
