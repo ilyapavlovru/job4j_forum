@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.job4j.forum.model.Comment;
 import ru.job4j.forum.model.Post;
 import ru.job4j.forum.service.PostService;
 
@@ -45,5 +46,29 @@ public class IndexControl {
         Optional<Post> post = postService.findPostById(id);
         post.ifPresent(value -> model.addAttribute("post", value));
         return "post/update";
+    }
+
+    @GetMapping("/show")
+    public String show(@RequestParam("id") int id, Model model) {
+        Optional<Post> post = postService.findPostById(id);
+        post.ifPresent(value -> model.addAttribute("post", value));
+        return "post";
+    }
+
+    @GetMapping("/addComment")
+    public String addComment(@RequestParam("id") int id, Model model) {
+        Optional<Post> post = postService.findPostById(id);
+        post.ifPresent(value -> model.addAttribute("post", value));
+        return "comment/create";
+    }
+
+    @PostMapping("/saveComment")
+    public String save(@RequestParam("id") int id, @ModelAttribute Comment comment, HttpServletRequest req) {
+
+        Post post = postService.findPostById(id).get();
+        post.addComment(comment);
+
+        postService.savePost(post);
+        return "redirect:/";
     }
 }

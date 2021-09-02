@@ -26,49 +26,32 @@
 <body>
 
 <div class="container">
-    <div class="row">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/create'/>">Добавить пост</a>
-            </li>
-        </ul>
-    </div>
-    <hr align="left" size="5">
-</div>
-
-<div class="container">
-    <h2>Все посты</h2>
+    <h2>Детализация поста</h2>
     <div class="row">
         <div class="col-12">
             <table class="table table-bordered" id='table'>
 
                 <thead>
                 <tr>
-                    <th scope="col">Тема поста</th>
+                    <th scope="col">Тема поста: <c:out value="${post.name}"/></th>
                 </tr>
                 </thead>
 
                 <tbody id="allPostsTable">
-                <c:forEach items="${posts}" var="post">
+
                     <tr>
-
                         <td>
-                            <a href='<c:url value="/update?id=${post.id}"/>'>
-                                <i class="fa fa-edit mr-3"></i>
-                            </a>
-
-                            <a href='<c:url value="/show?id=${post.id}"/>'> <c:out value="${post.name}"/></a>
-
-                            <br>
                             <c:forEach items="${post.comments}" var="comment">
                                 <c:out value="${comment.text}"/> <br>
                             </c:forEach>
                         </td>
                     </tr>
-                </c:forEach>
+
                 </tbody>
 
+
             </table>
+            <a href='<c:url value="/addComment?id=${post.id}"/>'>Добавить комментарий</a>
         </div>
     </div>
 </div>
