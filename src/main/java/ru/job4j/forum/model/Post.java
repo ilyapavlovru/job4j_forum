@@ -9,8 +9,9 @@ public class Post {
     private String desc;
     private Calendar created;
 
-    public static Post of(String name) {
+    public static Post of(int id, String name) {
         Post post = new Post();
+        post.id = id;
         post.name = name;
         return post;
     }

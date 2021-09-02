@@ -2,20 +2,29 @@ package ru.job4j.forum.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.forum.model.Post;
+import ru.job4j.forum.repository.PostMemRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class PostService {
 
-    private final List<Post> posts = new ArrayList<>();
+    private PostMemRepository postMemRepository;
 
-    public PostService() {
-        posts.add(Post.of("Продаю машину ладу 01."));
+    public PostService(PostMemRepository postMemRepository) {
+        this.postMemRepository = postMemRepository;
     }
 
-    public List<Post> getAll() {
-        return posts;
+    public Collection<Post> findAllPosts() {
+        return postMemRepository.findAllPosts();
+    }
+
+    public void savePost(Post post) {
+        postMemRepository.savePost(post);
+    }
+
+    public Optional<Post> findPostById(int id) {
+        return postMemRepository.findPostById(id);
     }
 }
