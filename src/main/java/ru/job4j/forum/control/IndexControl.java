@@ -63,12 +63,12 @@ public class IndexControl {
     }
 
     @PostMapping("/saveComment")
-    public String save(@RequestParam("id") int id, @ModelAttribute Comment comment, HttpServletRequest req) {
-
+    public String save(@RequestParam("id") int id, @ModelAttribute Comment comment, HttpServletRequest req, Model model) {
         Post post = postService.findPostById(id).get();
-        post.addComment(comment);
-
+        Comment savedComment = postService.saveComment(comment);
+        post.addComment(savedComment);
         postService.savePost(post);
-        return "redirect:/";
+        model.addAttribute("post", post);
+        return "post";
     }
 }

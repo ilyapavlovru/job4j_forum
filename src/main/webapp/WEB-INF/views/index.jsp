@@ -60,9 +60,6 @@
                             <a href='<c:url value="/show?id=${post.id}"/>'> <c:out value="${post.name}"/></a>
 
                             <br>
-                            <c:forEach items="${post.comments}" var="comment">
-                                <c:out value="${comment.text}"/> <br>
-                            </c:forEach>
                         </td>
                     </tr>
                 </c:forEach>

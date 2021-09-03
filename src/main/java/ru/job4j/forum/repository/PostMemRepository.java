@@ -15,6 +15,7 @@ public class PostMemRepository {
 
     private final Map<Integer, Post> posts = new HashMap<>();
     private final static AtomicInteger ACCIDENT_ID = new AtomicInteger(2);
+    private final static AtomicInteger COMMENT_ID = new AtomicInteger(2);
 
     private PostMemRepository() {
         Post post1 = Post.of(1, "Продаю машину ладу 01");
@@ -44,5 +45,10 @@ public class PostMemRepository {
 
     public Optional<Post> findPostById(int id) {
         return Optional.ofNullable(posts.get(id));
+    }
+
+    public Comment saveComment(Comment comment) {
+        comment.setId(COMMENT_ID.incrementAndGet());
+        return comment;
     }
 }
