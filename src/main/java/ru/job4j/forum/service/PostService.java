@@ -22,7 +22,6 @@ public class PostService {
     }
 
     public void savePost(Post post) {
-        post.setCreated(Calendar.getInstance());
         postRepository.save(post);
     }
 

@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.forum.model.Comment;
 import ru.job4j.forum.model.Post;
+import ru.job4j.forum.model.User;
 import ru.job4j.forum.service.CommentService;
 import ru.job4j.forum.service.PostService;
+import ru.job4j.forum.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -21,10 +23,12 @@ public class IndexControl {
 
     private final PostService postService;
     private final CommentService commentService;
+    private final UserService userService;
 
-    public IndexControl(PostService postService, CommentService commentService) {
+    public IndexControl(PostService postService, CommentService commentService, UserService userService) {
         this.postService = postService;
         this.commentService = commentService;
+        this.userService = userService;
     }
 
     @GetMapping({"/", "/index"})
@@ -43,6 +47,12 @@ public class IndexControl {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Post post, HttpServletRequest req) {
+        String userName = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+        User user = userService.findUserByName(userName);
+        post.setUser(user);
         postService.savePost(post);
         return "redirect:/";
     }

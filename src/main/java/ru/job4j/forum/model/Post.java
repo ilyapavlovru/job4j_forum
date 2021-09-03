@@ -20,6 +20,10 @@ public class Post {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post", fetch = FetchType.LAZY)
     private List<Comment> comments = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public static Post of(int id, String name) {
         Post post = new Post();
         post.id = id;
@@ -70,6 +74,14 @@ public class Post {
 
     public void addComment(Comment comment) {
         this.comments.add(comment);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
