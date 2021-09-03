@@ -53,6 +53,7 @@
                 <tr>
                     <th scope="col">Тема поста</th>
                     <th scope="col">Создан</th>
+                    <th scope="col">Автор</th>
                 </tr>
                 </thead>
 
@@ -69,8 +70,12 @@
 
                             <br>
                         </td>
-                        <td class="center-align">
+                        <td>
                             <fmt:formatDate type="time" value="${post.created.time}" pattern="dd.MM.yyyy HH:mm:ss"/>
+                        </td>
+
+                        <td>
+                            <c:out value="${post.user.userName}"/>
                         </td>
 
                     </tr>

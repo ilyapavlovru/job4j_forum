@@ -47,11 +47,8 @@ public class IndexControl {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Post post, HttpServletRequest req) {
-        String userName = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getName();
-        User user = userService.findUserByName(userName);
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByUserName(userName);
         post.setUser(user);
         postService.savePost(post);
         return "redirect:/";
@@ -83,7 +80,10 @@ public class IndexControl {
     @PostMapping("/saveComment")
     public String save(@RequestParam("id") int id, @ModelAttribute Comment comment, HttpServletRequest req, Model model) {
         model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByUserName(userName);
         Post post = postService.findPostById(id).get();
+        comment.setUser(user);
         comment.setPost(post);
         Comment savedComment = commentService.saveComment(comment);
         post.addComment(savedComment);

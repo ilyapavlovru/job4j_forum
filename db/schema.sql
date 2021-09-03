@@ -12,8 +12,8 @@ create table comments
     id      serial primary key,
     text    varchar(4000),
     created timestamp without time zone not null default now(),
-    post_id int                         not null references posts (id)
-
+    post_id int                         not null references posts (id),
+    user_id int                         not null references users (id)
 );
 
 create table authorities
