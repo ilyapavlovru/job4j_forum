@@ -56,12 +56,12 @@
                 <tbody id="allPostsTable">
 
                     <tr>
-                        <td>
-                            <c:forEach items="${post.comments}" var="comment">
-                                <fmt:formatDate type="time" value="${comment.created.time}" pattern="dd.MM.yyyy HH:mm:ss"/> <br>
-                                <c:out value="${comment.text}"/> <br> <br>
-                            </c:forEach>
-                        </td>
+<%--                        <td>--%>
+<%--                            <c:forEach items="${post.comments}" var="comment">--%>
+<%--                                <fmt:formatDate type="time" value="${comment.created.time}" pattern="dd.MM.yyyy HH:mm:ss"/> <br>--%>
+<%--                                <c:out value="${comment.text}"/> <br> <br>--%>
+<%--                            </c:forEach>--%>
+<%--                        </td>--%>
                     </tr>
 
                 </tbody>

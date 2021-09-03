@@ -7,7 +7,7 @@ import ru.job4j.forum.model.Post;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
+//@Repository
 public class PostMemRepository {
 
     private final Map<Integer, Post> posts = new HashMap<>();
@@ -20,8 +20,8 @@ public class PostMemRepository {
         posts.put(1, post1);
         posts.put(2, post2);
 
-        post1.addComment(Comment.of(1, "Отличный пост!"));
-        post1.addComment(Comment.of(2, "Какова цена?"));
+//        post1.addComment(Comment.of(1, "Отличный пост!"));
+//        post1.addComment(Comment.of(2, "Какова цена?"));
     }
 
     public Collection<Post> findAllPosts() {

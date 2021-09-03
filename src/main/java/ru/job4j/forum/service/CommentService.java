@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.forum.model.Comment;
 import ru.job4j.forum.repository.CommentMemRepository;
 
-@Service
+//@Service
 public class CommentService {
 
     private CommentMemRepository commentMemRepository;

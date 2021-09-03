@@ -1,35 +1,37 @@
 package ru.job4j.forum.service;
 
 import org.springframework.stereotype.Service;
-import ru.job4j.forum.model.Comment;
 import ru.job4j.forum.model.Post;
-import ru.job4j.forum.repository.PostMemRepository;
+import ru.job4j.forum.store.PostRepository;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PostService {
 
-    private PostMemRepository postMemRepository;
+    private final PostRepository postRepository;
 
-    public PostService(PostMemRepository postMemRepository) {
-        this.postMemRepository = postMemRepository;
+    public PostService(PostRepository postRepository) {
+        this.postRepository = postRepository;
     }
 
     public Collection<Post> findAllPosts() {
-        return postMemRepository.findAllPosts();
+        List<Post> rsl = new ArrayList<>();
+        postRepository.findAll().forEach(rsl::add);
+        return rsl;
     }
 
     public void savePost(Post post) {
-        postMemRepository.savePost(post);
+        post.setCreated(Calendar.getInstance());
+        postRepository.save(post);
     }
+
 
     public Optional<Post> findPostById(int id) {
-        return postMemRepository.findPostById(id);
+        return postRepository.findById(id);
     }
-
-    public Comment saveComment(Comment comment) {
-        return postMemRepository.saveComment(comment);
-    }
+//
+//    public Comment saveComment(Comment comment) {
+//        return postMemRepository.saveComment(comment);
+//    }
 }

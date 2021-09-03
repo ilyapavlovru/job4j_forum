@@ -1,14 +1,24 @@
 package ru.job4j.forum.model;
 
+import javax.persistence.*;
 import java.util.*;
 
+@Entity
+@Table(name = "posts")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private String desc;
-    private Calendar created;
 
-    private List<Comment> comments = new ArrayList<>();
+    private String name;
+
+    private String description;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar created = new GregorianCalendar();
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post", fetch = FetchType.LAZY)
+    private final List<Comment> comments = new ArrayList<>();
 
     public static Post of(int id, String name) {
         Post post = new Post();
@@ -34,12 +44,12 @@ public class Post {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Calendar getCreated() {
@@ -50,17 +60,17 @@ public class Post {
         this.created = created;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public void addComment(Comment comment) {
-        this.comments.add(comment);
-    }
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
+//
+//    public void addComment(Comment comment) {
+//        this.comments.add(comment);
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -73,12 +83,12 @@ public class Post {
         Post post = (Post) o;
         return id == post.id
                 && Objects.equals(name, post.name)
-                && Objects.equals(desc, post.desc)
+                && Objects.equals(description, post.description)
                 && Objects.equals(created, post.created);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, desc, created);
+        return Objects.hash(id, name, description, created);
     }
 }

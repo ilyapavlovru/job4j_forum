@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
+//@Repository
 public class CommentMemRepository {
     private final Map<Integer, Comment> comments = new HashMap<>();
     private final static AtomicInteger COMMENT_ID = new AtomicInteger(2);
