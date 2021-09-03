@@ -26,12 +26,7 @@ public class PostService {
         postRepository.save(post);
     }
 
-
     public Optional<Post> findPostById(int id) {
         return postRepository.findById(id);
     }
-//
-//    public Comment saveComment(Comment comment) {
-//        return postMemRepository.saveComment(comment);
-//    }
 }

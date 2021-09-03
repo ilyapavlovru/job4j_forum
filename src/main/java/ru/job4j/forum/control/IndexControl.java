@@ -19,11 +19,11 @@ import java.util.Optional;
 public class IndexControl {
 
     private final PostService postService;
-//    private final CommentService commentService;
+    private final CommentService commentService;
 
-    public IndexControl(PostService postService) {
+    public IndexControl(PostService postService, CommentService commentService) {
         this.postService = postService;
-//        this.commentService = commentService;
+        this.commentService = commentService;
     }
 
     @GetMapping({"/", "/index"})
@@ -57,21 +57,22 @@ public class IndexControl {
         post.ifPresent(value -> model.addAttribute("post", value));
         return "post";
     }
-//
-//    @GetMapping("/addComment")
-//    public String addComment(@RequestParam("id") int id, Model model) {
-//        Optional<Post> post = postService.findPostById(id);
-//        post.ifPresent(value -> model.addAttribute("post", value));
-//        return "comment/create";
-//    }
-//
-//    @PostMapping("/saveComment")
-//    public String save(@RequestParam("id") int id, @ModelAttribute Comment comment, HttpServletRequest req, Model model) {
-//        Post post = postService.findPostById(id).get();
-//        Comment savedComment = commentService.saveComment(comment);
-////        post.addComment(savedComment);
-//        postService.savePost(post);
-//        model.addAttribute("post", post);
-//        return "post";
-//    }
+
+    @GetMapping("/addComment")
+    public String addComment(@RequestParam("id") int id, Model model) {
+        Optional<Post> post = postService.findPostById(id);
+        post.ifPresent(value -> model.addAttribute("post", value));
+        return "comment/create";
+    }
+
+    @PostMapping("/saveComment")
+    public String save(@RequestParam("id") int id, @ModelAttribute Comment comment, HttpServletRequest req, Model model) {
+        Post post = postService.findPostById(id).get();
+        comment.setPost(post);
+        Comment savedComment = commentService.saveComment(comment);
+        post.addComment(savedComment);
+        postService.savePost(post);
+        model.addAttribute("post", post);
+        return "post";
+    }
 }

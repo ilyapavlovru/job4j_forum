@@ -18,7 +18,7 @@ public class Post {
     private Calendar created = new GregorianCalendar();
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post", fetch = FetchType.LAZY)
-    private final List<Comment> comments = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     public static Post of(int id, String name) {
         Post post = new Post();
@@ -60,17 +60,17 @@ public class Post {
         this.created = created;
     }
 
-//    public List<Comment> getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(List<Comment> comments) {
-//        this.comments = comments;
-//    }
-//
-//    public void addComment(Comment comment) {
-//        this.comments.add(comment);
-//    }
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+    }
 
     @Override
     public boolean equals(Object o) {
