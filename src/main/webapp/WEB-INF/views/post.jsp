@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html lang="en">
 
@@ -26,6 +28,20 @@
 <body>
 
 <div class="container">
+    <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/'/>">Все посты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/create'/>">Добавить пост</a>
+            </li>
+        </ul>
+    </div>
+    <hr align="left" size="3">
+</div>
+
+<div class="container">
     <h2>Детализация поста</h2>
     <div class="row">
         <div class="col-12">
@@ -42,7 +58,8 @@
                     <tr>
                         <td>
                             <c:forEach items="${post.comments}" var="comment">
-                                <c:out value="${comment.text}"/> <br>
+                                <fmt:formatDate type="time" value="${comment.created.time}" pattern="dd.MM.yyyy HH:mm:ss"/> <br>
+                                <c:out value="${comment.text}"/> <br> <br>
                             </c:forEach>
                         </td>
                     </tr>

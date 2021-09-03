@@ -24,6 +24,20 @@
 
 <body>
 
+<div class="container">
+    <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/'/>">Все посты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/create'/>">Добавить пост</a>
+            </li>
+        </ul>
+    </div>
+    <hr align="left" size="3">
+</div>
+
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">

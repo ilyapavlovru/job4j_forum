@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.forum.model.Comment;
 import ru.job4j.forum.model.Post;
+import ru.job4j.forum.service.CommentService;
 import ru.job4j.forum.service.PostService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +19,11 @@ import java.util.Optional;
 public class IndexControl {
 
     private final PostService postService;
+    private final CommentService commentService;
 
-    public IndexControl(PostService postService) {
+    public IndexControl(PostService postService, CommentService commentService) {
         this.postService = postService;
+        this.commentService = commentService;
     }
 
     @GetMapping({"/", "/index"})
@@ -65,7 +68,7 @@ public class IndexControl {
     @PostMapping("/saveComment")
     public String save(@RequestParam("id") int id, @ModelAttribute Comment comment, HttpServletRequest req, Model model) {
         Post post = postService.findPostById(id).get();
-        Comment savedComment = postService.saveComment(comment);
+        Comment savedComment = commentService.saveComment(comment);
         post.addComment(savedComment);
         postService.savePost(post);
         model.addAttribute("post", post);

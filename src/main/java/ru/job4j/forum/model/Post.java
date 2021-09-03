@@ -14,6 +14,7 @@ public class Post {
         Post post = new Post();
         post.id = id;
         post.name = name;
+        post.created = Calendar.getInstance();
         return post;
     }
 

@@ -12,6 +12,7 @@ public class Comment {
         Comment comment = new Comment();
         comment.id = id;
         comment.text = text;
+        comment.created = Calendar.getInstance();
         return comment;
     }
 

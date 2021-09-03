@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -29,11 +30,14 @@
     <div class="row">
         <ul class="nav">
             <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/'/>">Все посты</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/create'/>">Добавить пост</a>
             </li>
         </ul>
     </div>
-    <hr align="left" size="5">
+    <hr align="left" size="3">
 </div>
 
 <div class="container">
@@ -45,6 +49,7 @@
                 <thead>
                 <tr>
                     <th scope="col">Тема поста</th>
+                    <th scope="col">Создан</th>
                 </tr>
                 </thead>
 
@@ -61,6 +66,10 @@
 
                             <br>
                         </td>
+                        <td class="center-align">
+                            <fmt:formatDate type="time" value="${post.created.time}" pattern="dd.MM.yyyy HH:mm:ss"/>
+                        </td>
+
                     </tr>
                 </c:forEach>
                 </tbody>

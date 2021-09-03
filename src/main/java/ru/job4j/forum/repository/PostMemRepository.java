@@ -4,10 +4,7 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.forum.model.Comment;
 import ru.job4j.forum.model.Post;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
@@ -34,6 +31,7 @@ public class PostMemRepository {
     public Post savePost(Post post) {
         if (post.getId() == 0) {
             post.setId(ACCIDENT_ID.incrementAndGet());
+            post.setCreated(Calendar.getInstance());
             posts.put(post.getId(), post);
             return post;
         }
