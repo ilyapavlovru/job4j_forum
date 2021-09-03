@@ -33,6 +33,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/create'/>">Добавить пост</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/login'/>"> ${user.username} | Выйти</a>
+            </li>
         </ul>
     </div>
     <hr align="left" size="3">

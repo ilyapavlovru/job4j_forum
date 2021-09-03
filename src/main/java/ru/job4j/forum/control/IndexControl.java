@@ -1,5 +1,6 @@
 package ru.job4j.forum.control;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class IndexControl {
 
     @GetMapping({"/", "/index"})
     public String index(Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         Collection<Post> posts = postService.findAllPosts();
         model.addAttribute("posts", posts);
         return "index";
@@ -35,6 +37,7 @@ public class IndexControl {
 
     @GetMapping("/create")
     public String create(Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "post/create";
     }
 
@@ -46,6 +49,7 @@ public class IndexControl {
 
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         Optional<Post> post = postService.findPostById(id);
         post.ifPresent(value -> model.addAttribute("post", value));
         return "post/update";
@@ -53,6 +57,7 @@ public class IndexControl {
 
     @GetMapping("/show")
     public String show(@RequestParam("id") int id, Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         Optional<Post> post = postService.findPostById(id);
         post.ifPresent(value -> model.addAttribute("post", value));
         return "post";
@@ -67,6 +72,7 @@ public class IndexControl {
 
     @PostMapping("/saveComment")
     public String save(@RequestParam("id") int id, @ModelAttribute Comment comment, HttpServletRequest req, Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         Post post = postService.findPostById(id).get();
         comment.setPost(post);
         Comment savedComment = commentService.saveComment(comment);
