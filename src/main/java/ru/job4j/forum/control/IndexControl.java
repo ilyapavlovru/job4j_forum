@@ -83,11 +83,11 @@ public class IndexControl {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUserName(userName);
         Post post = postService.findPostById(id).get();
-        comment.setUser(user);
-        comment.setPost(post);
-        Comment savedComment = commentService.saveComment(comment);
-        post.addComment(savedComment);
-        postService.savePost(post);
+        Comment createdComment = new Comment();
+        createdComment.setText(comment.getText());
+        createdComment.setUser(user);
+        createdComment.setPost(post);
+        commentService.saveComment(createdComment);
         model.addAttribute("post", post);
         return "post";
     }

@@ -61,14 +61,14 @@
                     <tr>
                         <td>
                             <c:forEach items="${post.comments}" var="comment">
-                                <fmt:formatDate type="time" value="${comment.created.time}" pattern="dd.MM.yyyy HH:mm:ss"/> <br>
+                                <b><c:out value="${comment.user.userName}"/></b>
+                                (<fmt:formatDate type="time" value="${comment.created.time}" pattern="dd.MM.yyyy HH:mm:ss"/>) <br>
                                 <c:out value="${comment.text}"/> <br> <br>
                             </c:forEach>
                         </td>
                     </tr>
 
                 </tbody>
-
 
             </table>
             <a href='<c:url value="/addComment?id=${post.id}"/>'>Добавить комментарий</a>
