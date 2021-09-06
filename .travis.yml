@@ -24,3 +24,9 @@ notifications:
       -forcety@mail.ru
     on_success: never
     on_failure: always
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: PuupTS91ntWpbhmK0v8z/XdxxiZ3SN3TfJiwlMHtluDi6MmrEoVczl058scWZ9W+/90pBsecFiPqt+PbaFLmOqButiT26Vn8Ej+SPKaon63kg4Bi3PVTdnMKa6ao0i4gu4p2vFxVtlBcJFOCSgx/X5wPeWR9LFnF24oSF/L/U1cqEAeB8aeOre6GwrP+5I0KcmXPD8O92Q86JCA1rIHLbMx3vGXHLhWlQ0Hc24ovlNJ/d0UeVyS6SmZR+jhN9pd8bbEUj+uhvggzy5N8PRKWZ3O87Jzib+KwF3lKlx6rEcbJUFl4yLC/JcIrqr9pM+tM/a7XaFoeY6o1MyTd3EyGt758zQiFTQadWaoUm4wZBI4MH75R9d/9CC3pfnpov4P8wHL4z6xv0kjG+k3shX957JEoOFWe8FCUBW9eUSRGxWtp+lX1PmS5WC4dDILTQyK6S+zdgk358AGfdVco65gK8D1KCX6PgGGHVjFqcni5SHsJjXvUzJ7sQ5baO0ASj8UctnMJdmMjjL470YqhOSfiUvkpUBpSck0mPkZ3TA73TKcCEPWzlNI8B8IGa1zKrSx8OjPPUBEV0F+UMW908ihYhIYR8pUln1kP3J/wP+bmOcN/jcT0Itt8MGOO3zBAOshuJCXyjNwZJ2A96FkQZj6OZor7DgHPN6jCuLXKKq267jo=
+  app: afternoon-ravine-72161
