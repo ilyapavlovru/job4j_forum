@@ -1,6 +1,7 @@
 package ru.job4j.forum.control;
 
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,9 +48,28 @@ public class PostControl {
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
         model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+        UserDetails userDetails = (UserDetails) model.getAttribute("user");
+        String userName = userDetails.getUsername();
+        User user = userService.findByUserName(userName);
+
         Optional<Post> post = postService.findPostById(id);
-        post.ifPresent(value -> model.addAttribute("post", value));
-        return "post/update";
+
+        String errorMessage;
+        if (post.isEmpty()) {
+            errorMessage = "Пост не найден для заданного идентификатора";
+            model.addAttribute("errorMessage", errorMessage);
+            return "failure";
+        }
+
+        if (user.getId() == post.get().getUser().getId()) {
+            post.ifPresent(value -> model.addAttribute("post", value));
+            return "post/update";
+        } else {
+            errorMessage = "Вы не можете редактировать тему чужого поста!";
+            model.addAttribute("errorMessage", errorMessage);
+            return "failure";
+        }
     }
 
     @GetMapping("/show")
